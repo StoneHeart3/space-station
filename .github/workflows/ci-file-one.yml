@@ -14,9 +14,30 @@ jobs:
 
       - name: Show machine details
         run: |
-          hostnamectl
+            hostnamectl
 
+      - name: where am I ?.
+        run: |
+          pwd
+          echo $GITHUB_WORKSPACE
+          
       - name: Run unit test
         run: |
           mvn clean test
+
+      - name: List Target folder before jar creation 
+        run: |
+          ls -lh target
+
+      - name: Build Jar
+        run: |
+          mvn clean package
+
+      - name: List Target folder after jar creation 
+        run: |
+          ls -lh target
+          
+      - name: Display Jar File  
+        run: |
+          find target -name "*.jar"
           
