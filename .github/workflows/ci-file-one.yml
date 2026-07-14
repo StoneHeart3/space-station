@@ -16,6 +16,15 @@ jobs:
         run: |
             hostnamectl
 
+      - name: Display context
+        run: |
+            echo "Repository : $GITHUB_REPOSITORY"
+            echo "Workflow   : $GITHUB_WORKFLOW"
+            echo "RunID      : $GITHUB_RUN_ID"
+            echo "Commit SHA : $GITHUB_SHA"
+            echo "Branch     : $GITHUB_REF_NAME"
+            echo "Actor      : $GITHUB_ACTOR"
+     
       - name: where am I ?.
         run: |
           pwd
