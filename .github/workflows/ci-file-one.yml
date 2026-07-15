@@ -3,7 +3,15 @@ run-name: action-file-one
 
 on:
   push:
-
+   branches: 
+     - main
+     - release/** ## trigger only on these branches
+   branches-ignore:
+     - feature/** # build wont be automatically triggered for the feature branches
+   paths-ignore:
+     - docs/**
+     - README.md # build won't be triggered if the changes is only made on those 
+     
 jobs:
   job-one:
     runs-on: ubuntu-latest
