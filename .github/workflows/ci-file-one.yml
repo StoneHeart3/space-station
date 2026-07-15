@@ -29,6 +29,14 @@ jobs:
         run: |
           pwd
           echo $GITHUB_WORKSPACE
+
+      - name : Cache Maven Dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-$${{ hashFiles('**/pom.xml') }}
+          restore-keys: | 
+            ${{ runner.os }}-maven-     
           
       - name: Run unit test
         run: |
