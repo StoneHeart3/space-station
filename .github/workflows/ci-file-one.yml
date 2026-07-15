@@ -16,7 +16,7 @@ jobs:
         run: |
             hostnamectl
 
-      - name: Display context
+      - name: we gonna display we details that runner has 
         run: |
             echo "Repository : $GITHUB_REPOSITORY"
             echo "Workflow   : $GITHUB_WORKFLOW"
@@ -30,7 +30,7 @@ jobs:
           pwd
           echo $GITHUB_WORKSPACE
 
-      - name : Cache Maven Dependencies
+      - name : We are Caching the Maven Dependencies 
         uses: actions/cache@v4
         with:
           path: ~/.m2/repository
@@ -38,7 +38,7 @@ jobs:
           restore-keys: | 
             ${{ runner.os }}-maven-     
           
-      - name: Run unit test
+      - name: Run  the unit tests of this application
         run: |
           mvn clean test
 
@@ -46,7 +46,7 @@ jobs:
         run: |
           ls -lh target
 
-      - name: Build Jar
+      - name: Build Jar file outta this application
         run: |
           mvn clean package
 
@@ -54,11 +54,11 @@ jobs:
         run: |
           ls -lh target
           
-      - name: Display Jar File  
+      - name: Display Jar File we created 
         run: |
           find target -name "*.jar"
 
-      - name: Upload the jar file 
+      - name: Upload the jar file created outta this build
         uses: actions/upload-artifact@v4
         with:
           name: space-station-build-${{github.run_number}}
