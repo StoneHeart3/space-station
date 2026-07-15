@@ -6,8 +6,8 @@ on:
    branches: 
      - main
      - release/** ## trigger only on these branches
-   branches-ignore:
-     - feature/** # build wont be automatically triggered for the feature branches
+   # branches-ignore:
+   #   - feature/** # build wont be automatically triggered for the feature branches
    paths-ignore:
      - docs/**
      - README.md # build won't be triggered if the changes is only made on those 
@@ -42,7 +42,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ~/.m2/repository
-          key: ${{ runner.os }}-maven-$${{ hashFiles('**/pom.xml') }}
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
           restore-keys: | 
             ${{ runner.os }}-maven-     
           
