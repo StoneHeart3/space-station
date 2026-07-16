@@ -81,5 +81,23 @@ jobs:
         with:
           name: space-station-build-${{github.run_number}}
           path: target/*jar
-    
+
+      # login to Docker hub
+      - name: We are Logging into DockerHub     
+        uses: docker/login-actions@v3
+        with:
+          username: ${{ env.DOCKER_PLAYER_NAME }}
+          password: ${{ secrets.DOCKER_PASS }}
+
+      - name: Setup Docker Buildx
+        uses: docker/setup-buildx-action@v3
           
+      - name: now we gonna build the image
+        uses: docker/build-push-action@v5  
+        with:
+          context: .
+          push: true
+          # We tag it twice: once as 'latest', and once with the GitHub Run Number for easy version tracking!
+          tags: |
+            ${{ secrets.DOCKER_PASS }}/spaceship-station:latest
+            ${{ env.DOCKER_PLAYER_NAME }}/spaceship-station:v${{ github.run_number}}
