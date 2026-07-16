@@ -99,5 +99,5 @@ jobs:
           push: true
           # We tag it twice: once as 'latest', and once with the GitHub Run Number for easy version tracking!
           tags: |
-            ${{ vars.DOCKER_PLAYER_NAME }}spaceship-station:latest
+            ${{ vars.DOCKER_PLAYER_NAME }}/spaceship-station:latest
             ${{ vars.DOCKER_PLAYER_NAME }}/spaceship-station:v${{ github.run_number}}
