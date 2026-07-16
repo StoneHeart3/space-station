@@ -38,14 +38,23 @@ jobs:
           pwd
           echo $GITHUB_WORKSPACE
 
-      - name : We are Caching the Maven Dependencies 
-        uses: actions/cache@v4
+      # - name : We are Caching the Maven Dependencies 
+      #   uses: actions/cache@v4
+      #   with:
+      #     path: ~/.m2/repository
+      #     key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+      #     restore-keys: | 
+      #       ${{ runner.os }}-maven-  
+
+# --- NEW: Explicitly set up Java 17 and enable built-in Maven caching ---
+      - name: Setup JDK 17
+        uses: action/setup-java@v4
         with:
-          path: ~/.m2/repository
-          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-          restore-keys: | 
-            ${{ runner.os }}-maven-     
-          
+          java-version: '17'
+          distribution: 'temurin'
+          cache: 'maven'
+
+# --- UPDATED: Run tests (Testcontainers will automatically use the runner's Docker daemon) ---          
       - name: Run  the unit tests of this application
         run: |
           mvn clean test
@@ -54,9 +63,10 @@ jobs:
         run: |
           ls -lh target
 
+# --- UPDATED: Build the Jar, but skip tests since we just ran them successfully ---
       - name: Build Jar file outta this application
         run: |
-          mvn clean package
+          mvn package -DskipTests
 
       - name: List Target folder after jar creation 
         run: |
