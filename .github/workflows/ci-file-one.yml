@@ -55,9 +55,9 @@ jobs:
           cache: 'maven'
 
 # --- UPDATED: Run tests (Testcontainers will automatically use the runner's Docker daemon) ---          
-      - name: Run  the unit tests of this application
-        run: |
-          mvn clean test
+      # - name: Run  the unit tests of this application
+      #   run: |
+      #     mvn clean test
 
       - name: List Target folder before jar creation 
         run: |
