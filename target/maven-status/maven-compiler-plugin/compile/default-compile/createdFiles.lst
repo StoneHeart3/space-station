@@ -1,7 +1,0 @@
-com/station/spaceship/controller/SpaceshipController.class
-com/station/spaceship/model/RepairTicket.class
-com/station/spaceship/SpaceshipApplication.class
-com/station/spaceship/model/Spaceship.class
-com/station/spaceship/repository/RepairTicketRepository.class
-com/station/spaceship/repository/SpaceshipRepository.class
-com/station/spaceship/controller/RepairController.class
