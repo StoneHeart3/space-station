@@ -47,12 +47,8 @@ jobs:
       #       ${{ runner.os }}-maven-  
 
 # --- NEW: Explicitly set up Java 17 and enable built-in Maven caching ---
-      - name: Setup JDK 17
-        uses: actions/setup-java@v4
-        with:
-          java-version: '17'
-          distribution: 'temurin'
-          cache: 'maven'
+      - name: Setup Java
+        uses: ./github/actions/setup-java
 
 # --- UPDATED: Run tests (Testcontainers will automatically use the runner's Docker daemon) ---          
       # - name: Run  the unit tests of this application
