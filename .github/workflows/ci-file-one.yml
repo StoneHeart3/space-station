@@ -48,7 +48,7 @@ jobs:
 
 # --- NEW: Explicitly set up Java 17 and enable built-in Maven caching ---
       - name: Setup Java
-        uses: ./github/actions/setup-java
+        uses: ./github/actions/base-setup-java
 
 # --- UPDATED: Run tests (Testcontainers will automatically use the runner's Docker daemon) ---          
       # - name: Run  the unit tests of this application
