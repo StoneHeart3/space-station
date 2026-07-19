@@ -1,0 +1,18 @@
+name: Generate Image Tag
+
+description: Generating the image tag here and passing it out as output 
+
+outputs:
+  image-tag:
+      value: ${{ steps.tagger.outputs.image-tag }}
+
+runs: 
+   using: composite
+
+   steps:
+     - id: tagger
+       shell: bash
+       run: |
+         TAG_VERSIONING = "v${GITHUB_RUN_NUMBER}-$(echo ${ GITHUB_SHA } | cut -c1-7)"
+         echo "image-tag=$TAG_VERSIONING" >> "$GITHUB_OUTPUT"
+        
