@@ -13,6 +13,6 @@ runs:
      - id: tagger
        shell: bash
        run: |
-         TAG_VERSIONING = "v${GITHUB_RUN_NUMBER}-$(echo ${ GITHUB_SHA } | cut -c1-7)"
+         TAG_VERSIONING="v${GITHUB_RUN_NUMBER}-$(echo ${GITHUB_SHA} | cut -c1-7)"
          echo "image-tag=$TAG_VERSIONING" >> "$GITHUB_OUTPUT"
         
