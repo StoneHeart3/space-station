@@ -84,9 +84,6 @@ jobs:
         with:
           username: ${{ vars.DOCKER_PLAYER_NAME }}
           password: ${{ secrets.DOCKER_PASS }}
-
-      - name: Setup Docker Buildx
-        uses: docker/setup-buildx-action@v3
           
       - name: now we gonna build the image using custom actions
         uses: ./.github/actions/base-setup-docker-build
