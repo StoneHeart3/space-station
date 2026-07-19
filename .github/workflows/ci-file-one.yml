@@ -88,12 +88,10 @@ jobs:
       - name: Setup Docker Buildx
         uses: docker/setup-buildx-action@v3
           
-      - name: now we gonna build the image
-        uses: docker/build-push-action@v5  
+      - name: now we gonna build the image using custom actions
+        uses: ./.github/actions/base-setup-docker-build
         with:
-          context: .
-          push: true
-          # We tag it twice: once as 'latest', and once with the GitHub Run Number for easy version tracking!
-          tags: |
-            ${{ vars.DOCKER_PLAYER_NAME }}/spaceship-station:latest
-            ${{ vars.DOCKER_PLAYER_NAME }}/spaceship-station:v${{ github.run_number}}
+          username: ${{ vars.DOCKER_PLAYER_NAME }}
+          password: ${{ secrets.DOCKER_PASS }}
+          image-name: spaceship-station
+          image-tag: ${{ github.run_number }}
