@@ -60,9 +60,9 @@ jobs:
           ls -lh target
 
 # --- UPDATED: Build the Jar, but skip tests since we just ran them successfully ---
-      # - name: Build Jar file outta this application
-      #   run: |
-      #     mvn package -DskipTests
+      - name: Build Jar file outta this application
+        run: |
+          mvn package -DskipTests
 
       - name: List Target folder after jar creation 
         run: |
@@ -84,6 +84,10 @@ jobs:
         with:
           username: ${{ vars.DOCKER_PLAYER_NAME }}
           password: ${{ secrets.DOCKER_PASS }}
+
+      - name: Use Tag Generator
+        id: versioner
+        uses: ./.github/actions/generate-image-tag
           
       - name: now we gonna build the image using custom actions
         uses: ./.github/actions/base-setup-docker-build
@@ -91,4 +95,4 @@ jobs:
           username: ${{ vars.DOCKER_PLAYER_NAME }}
           password: ${{ secrets.DOCKER_PASS }}
           image-name: spaceship-station
-          image-tag: ${{ github.run_number }}
+          image-tag: ${{ steps.versioner.outputs.image-tag }}
