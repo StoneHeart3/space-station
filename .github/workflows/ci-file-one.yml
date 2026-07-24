@@ -50,15 +50,15 @@ jobs:
       - name: Setup Java
         uses: ./.github/actions/base-setup-java
 
-# --- UPDATED: Run tests (Testcontainers will automatically use the runner's Docker daemon) ---          
-      # - name: Run  the unit tests of this application
-      #   run: |
-      #     mvn clean test
-
       - name: List Target folder before jar creation 
         run: |
           ls -lh target
 
+      - name: Codeql Activities
+        uses: github/codeql-action/init@v3
+        with:
+          languages: java
+      
       - name: Scan for Leakage
         uses: gitleaks/gitleaks-action@v2
 
@@ -67,13 +67,21 @@ jobs:
         with:
           scan-type: fs
           scan-ref: .   
-          severity: HIGH, CRITICAL
-          exit-code: -1
+          severity: HIGH,CRITICAL
+          exit-code: "1"
+
+# --- UPDATED: Run tests (Testcontainers will automatically use the runner's Docker daemon) ---          
+      # - name: Run  the unit tests of this application
+      #   run: |
+      #     mvn clean test
 
 # --- UPDATED: Build the Jar, but skip tests since we just ran them successfully ---
       - name: Build Jar file outta this application
         run: |
           mvn package -DskipTests
+
+      - name: analysis on code coverage
+        uses: github/codeql-action/analyze@v3
 
       - name: List Target folder after jar creation 
         run: |
