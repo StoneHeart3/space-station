@@ -59,6 +59,15 @@ jobs:
         run: |
           ls -lh target
 
+      - name: Scan for Leakage
+        uses: gitleaks/gitleaks-action@v2
+
+      - name: Scan FileSystem
+        uses: aquasecurity/trivy-action@0.28.0
+        with:
+          scan-type: fs
+          scan-ref: .       
+
 # --- UPDATED: Build the Jar, but skip tests since we just ran them successfully ---
       - name: Build Jar file outta this application
         run: |
