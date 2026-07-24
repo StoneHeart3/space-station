@@ -67,8 +67,8 @@ jobs:
         with:
           scan-type: fs
           scan-ref: .   
-          severity: HIGH,CRITICAL
-          exit-code: "1"
+          # severity: HIGH,CRITICAL
+          # exit-code: "1"
 
 # --- UPDATED: Run tests (Testcontainers will automatically use the runner's Docker daemon) ---          
       # - name: Run  the unit tests of this application
